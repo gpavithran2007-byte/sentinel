@@ -85,7 +85,7 @@ export default function CustomerPage() {
           Your private overview
         </p>
 
-        <h1 className="mt-2 text-3xl font-semibold tracking-[-.035em]">
+        <h1 className="mt-2 max-w-2xl text-3xl font-semibold tracking-[-.035em] sm:text-4xl">
           A clearer month starts here.
         </h1>
 
@@ -98,7 +98,7 @@ export default function CustomerPage() {
         <div className="mt-8 grid gap-5 md:grid-cols-[1.1fr_.9fr]">
 
           {/* Financial Health */}
-          <div className="rounded-2xl border border-[#dfe7e8] bg-white p-6 shadow-sm">
+          <div className="rounded-2xl border border-[#dfe7e8] bg-white p-7 shadow-[0_12px_35px_rgba(23,61,64,0.05)]">
 
             <div className="flex items-start justify-between">
 
@@ -118,7 +118,7 @@ export default function CustomerPage() {
 
             </div>
 
-            <div className="mt-7 h-2 rounded-full bg-[#e8efed]">
+            <div className="mt-7 h-3 rounded-full bg-[#e8efed]">
               <div className="h-full w-[68%] rounded-full bg-[#65af88]" />
             </div>
 
@@ -144,7 +144,7 @@ export default function CustomerPage() {
           </div>
 
           {/* Support */}
-          <div className="rounded-2xl bg-[#173d40] p-6 text-white">
+          <div className="rounded-2xl bg-[#173d40] p-7 text-white shadow-[0_18px_45px_rgba(16,47,52,0.14)]">
 
             <p className="text-xs uppercase tracking-[.15em] text-[#9bc9b6]">
               A gentle next step
@@ -234,7 +234,7 @@ export default function CustomerPage() {
         )}
 
         {/* Monthly overview */}
-        <section className="mt-6 rounded-2xl border border-[#dfe7e8] bg-white p-6 shadow-sm">
+        <section className="mt-6 rounded-2xl border border-[#dfe7e8] bg-white p-7 shadow-[0_12px_35px_rgba(23,61,64,0.05)]">
 
           <div className="flex items-center justify-between">
             <div>

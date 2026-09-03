@@ -45,16 +45,18 @@ export default function Home() {
     setLoading(true);
 
     setTimeout(() => {
-      if (role === "customer") {
-        router.push("/customer");
-      } else {
-        router.push("/bank");
-      }
+      const destination =
+        role === "customer"
+          ? "/customer"
+          : role === "admin"
+            ? "/admin"
+            : "/bank";
+      router.push(destination);
     }, 700);
   };
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#061014] text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#071419] text-white">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-cyan-400/[0.07] blur-[130px]" />
@@ -70,7 +72,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="relative mx-auto flex min-h-screen max-w-[1400px] flex-col px-6 py-6 lg:px-12">
+      <div className="relative mx-auto flex min-h-screen max-w-[1400px] flex-col px-6 py-7 lg:px-12">
         {/* Header */}
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -86,7 +88,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs text-white/45 sm:flex">
+          <div className="hidden items-center gap-2 rounded-full border border-emerald-300/15 bg-emerald-300/[0.06] px-4 py-2 text-xs text-emerald-100/60 sm:flex">
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
             System operational
           </div>
@@ -94,7 +96,7 @@ export default function Home() {
 
         {/* Main */}
         <section className="flex flex-1 items-center justify-center py-12">
-          <div className="grid w-full max-w-[1150px] items-center gap-16 lg:grid-cols-[1fr_470px]">
+          <div className="grid w-full max-w-[1150px] items-center gap-12 lg:grid-cols-[1fr_470px]">
 
             {/* Left */}
             <div className="hidden lg:block">
@@ -103,7 +105,7 @@ export default function Home() {
                 Proactive financial protection
               </div>
 
-              <h1 className="max-w-[650px] text-6xl font-semibold leading-[1.05] tracking-[-0.05em]">
+              <h1 className="max-w-[650px] text-5xl font-semibold leading-[1.06] tracking-[-0.04em] xl:text-6xl">
                 See financial stress
                 <span className="block bg-gradient-to-r from-cyan-200 to-blue-400 bg-clip-text text-transparent">
                   before it becomes a crisis.
@@ -136,8 +138,8 @@ export default function Home() {
             </div>
 
             {/* Login Card */}
-            <div className="rounded-[28px] border border-white/10 bg-white/[0.035] p-2 shadow-2xl backdrop-blur-2xl">
-              <div className="rounded-[22px] border border-white/[0.06] bg-[#091219]/95 p-7 sm:p-9">
+            <div className="rounded-[28px] border border-white/10 bg-white/[0.045] p-2 shadow-2xl backdrop-blur-2xl">
+              <div className="rounded-[22px] border border-white/[0.07] bg-[#0b161d]/95 p-7 sm:p-9">
 
                 <div className="mb-8">
                   <p className="text-2xl font-semibold tracking-tight">
@@ -155,7 +157,7 @@ export default function Home() {
                     Access portal
                   </label>
 
-                  <div className="grid grid-cols-3 gap-1 rounded-xl border border-white/[0.07] bg-white/[0.025] p-1">
+                  <div className="grid grid-cols-3 gap-1 rounded-2xl border border-white/[0.08] bg-black/20 p-1">
                     {roles.map((item) => (
                       <button
                         key={item.id}
@@ -217,7 +219,7 @@ export default function Home() {
 
                   <button
                     disabled={loading}
-                    className="flex h-12 w-full items-center justify-center rounded-xl bg-gradient-to-r from-cyan-300 to-blue-400 text-sm font-semibold text-[#041018] transition hover:scale-[1.01] disabled:opacity-60"
+                    className="flex h-12 w-full items-center justify-center rounded-xl bg-cyan-300 text-sm font-semibold text-[#041018] transition hover:bg-cyan-200 disabled:opacity-60"
                   >
                     {loading ? "Authenticating..." : "Continue securely →"}
                   </button>

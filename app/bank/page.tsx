@@ -278,7 +278,7 @@ export default function BankDashboard() {
             {/* Customer Queue */}
             <section
               id="signals"
-              className="rounded-2xl border border-[#dfe7e8] bg-white shadow-sm"
+              className="rounded-2xl border border-[#dfe7e8] bg-white shadow-[0_12px_35px_rgba(23,61,64,0.05)]"
             >
 
               <div className="border-b border-[#e7eeee] px-6 py-5">
@@ -369,7 +369,7 @@ export default function BankDashboard() {
             {/* Case Detail */}
             <section
               id="intervention"
-              className="rounded-2xl bg-[#173d40] p-6 text-white shadow-lg"
+              className="rounded-2xl bg-[#173d40] p-7 text-white shadow-[0_18px_45px_rgba(16,47,52,0.16)]"
             >
 
               <p className="text-xs uppercase tracking-[.15em] text-[#9bc9b6]">
@@ -388,14 +388,18 @@ export default function BankDashboard() {
                   </p>
                 </div>
 
-                <div className="rounded-xl bg-white/10 px-4 py-2 text-right">
-                  <p className="text-2xl font-semibold text-[#f5c4a4]">
-                    {assessmentLoading ? "..." : riskScore}
-                  </p>
-
-                  <p className="text-[9px] uppercase tracking-wide text-[#b1cbc5]">
-                    risk score
-                  </p>
+                <div className="text-right">
+                  <div className="rounded-xl border border-[#f5c4a4]/20 bg-[#f5c4a4]/10 px-4 py-2">
+                    <p className="text-2xl font-semibold text-[#f5c4a4]">
+                      {assessmentLoading ? "..." : riskScore}
+                    </p>
+                    <p className="text-[9px] uppercase tracking-wide text-[#b1cbc5]">
+                      risk score
+                    </p>
+                  </div>
+                  <span className="mt-2 inline-block rounded-full bg-white/10 px-2 py-1 text-[9px] text-[#b1cbc5]">
+                    Sustained distress outlook
+                  </span>
                 </div>
 
               </div>
@@ -405,6 +409,19 @@ export default function BankDashboard() {
                   {assessmentError}
                 </div>
               )}
+
+              <div className="mt-5 rounded-xl border border-white/10 bg-white/[.045] p-4">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-semibold text-[#dceae5]">Resilience trend</p>
+                  <span className="rounded-full bg-[#8bc6a5]/15 px-2 py-1 text-[9px] text-[#9bc9b6]">Sustained outlook</span>
+                </div>
+                <div className="mt-4 flex h-12 items-end gap-1.5">
+                  {[42, 50, 46, 58, 64, selected.score].map((value, index) => (
+                    <div key={`${value}-${index}`} className="flex-1 rounded-t-sm bg-[#8bc6a5]/70" style={{ height: `${Math.max(18, Math.min(100, value))}%` }} />
+                  ))}
+                </div>
+                <p className="mt-2 text-[10px] text-[#8eafaa]">Current signals are read across recent months, not from a single event.</p>
+              </div>
 
               {/* AI explanation */}
               <div className="mt-6 rounded-xl border border-white/10 bg-white/[.06] p-5">
