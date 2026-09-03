@@ -1,0 +1,130 @@
+[
+  {
+    "feature": "current_stressed",
+    "importance": 0.34937912225723267
+  },
+  {
+    "feature": "stressed_months_recent",
+    "importance": 0.34905144572257996
+  },
+  {
+    "feature": "consecutive_stressed_months",
+    "importance": 0.06696838140487671
+  },
+  {
+    "feature": "debt_to_income_ratio",
+    "importance": 0.021955760195851326
+  },
+  {
+    "feature": "emi_to_income_ratio",
+    "importance": 0.013716299086809158
+  },
+  {
+    "feature": "event_normal",
+    "importance": 0.013599338009953499
+  },
+  {
+    "feature": "missed_payments",
+    "importance": 0.012938406318426132
+  },
+  {
+    "feature": "event_rising essentials",
+    "importance": 0.0128779336810112
+  },
+  {
+    "feature": "recent_recovery_indicator",
+    "importance": 0.012537864036858082
+  },
+  {
+    "feature": "emi",
+    "importance": 0.011997880414128304
+  },
+  {
+    "feature": "debt",
+    "importance": 0.011942924000322819
+  },
+  {
+    "feature": "credit_utilization",
+    "importance": 0.009683611802756786
+  },
+  {
+    "feature": "balance",
+    "importance": 0.008326690644025803
+  },
+  {
+    "feature": "credit_limit",
+    "importance": 0.007735167630016804
+  },
+  {
+    "feature": "month_index",
+    "importance": 0.007516569923609495
+  },
+  {
+    "feature": "event_gradual pressure",
+    "importance": 0.007279733195900917
+  },
+  {
+    "feature": "balance_change_pct",
+    "importance": 0.00719632301479578
+  },
+  {
+    "feature": "savings_buffer",
+    "importance": 0.006985364481806755
+  },
+  {
+    "feature": "income_volatility",
+    "importance": 0.006844719406217337
+  },
+  {
+    "feature": "expense_volatility",
+    "importance": 0.006778826471418142
+  },
+  {
+    "feature": "savings_buffer_change",
+    "importance": 0.006486781872808933
+  },
+  {
+    "feature": "discretionary_spending",
+    "importance": 0.0064712343737483025
+  },
+  {
+    "feature": "income",
+    "importance": 0.006411973852664232
+  },
+  {
+    "feature": "expense_to_income_pct",
+    "importance": 0.006226358003914356
+  },
+  {
+    "feature": "event_debt pressure",
+    "importance": 0.006218119990080595
+  },
+  {
+    "feature": "income_change_pct",
+    "importance": 0.006090923678129911
+  },
+  {
+    "feature": "expense_change_pct",
+    "importance": 0.005943466443568468
+  },
+  {
+    "feature": "essential_spending",
+    "importance": 0.005798343103379011
+  },
+  {
+    "feature": "event_variable income",
+    "importance": 0.005040399264544249
+  },
+  {
+    "feature": "event_income loss",
+    "importance": 0.0
+  },
+  {
+    "feature": "event_one-month emergency",
+    "importance": 0.0
+  },
+  {
+    "feature": "event_recovery",
+    "importance": 0.0
+  }
+]

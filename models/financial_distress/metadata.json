@@ -1,0 +1,75 @@
+{
+  "target": "future_sustained_distress",
+  "threshold": 0.028417445719242096,
+  "minimum_validation_precision": 0.7,
+  "validation_selection": {
+    "precision": 0.7345971563981043,
+    "recall": 0.9872611464968153,
+    "f1": 0.842391304347826
+  },
+  "metrics": {
+    "roc_auc": 0.9691479202037351,
+    "pr_auc": 0.9689883964040862,
+    "precision": 0.69377990430622,
+    "recall": 0.9539473684210527,
+    "f1": 0.8033240997229917,
+    "confusion_matrix": [
+      [
+        184,
+        64
+      ],
+      [
+        7,
+        145
+      ]
+    ],
+    "false_positives": 64,
+    "false_negatives": 7
+  },
+  "split": {
+    "train_rows": 3600,
+    "validation_rows": 400,
+    "test_rows": 400,
+    "train_customers": 600,
+    "validation_customers": 200,
+    "test_customers": 200,
+    "train_max_month_index": 6,
+    "validation_max_month_index": 8,
+    "test_min_month_index": 9
+  },
+  "feature_names": [
+    "month_index",
+    "income",
+    "essential_spending",
+    "discretionary_spending",
+    "balance",
+    "emi",
+    "debt",
+    "credit_limit",
+    "credit_utilization",
+    "missed_payments",
+    "savings_buffer",
+    "income_change_pct",
+    "expense_to_income_pct",
+    "expense_change_pct",
+    "balance_change_pct",
+    "savings_buffer_change",
+    "debt_to_income_ratio",
+    "emi_to_income_ratio",
+    "income_volatility",
+    "expense_volatility",
+    "current_stressed",
+    "consecutive_stressed_months",
+    "stressed_months_recent",
+    "recent_recovery_indicator",
+    "event_debt pressure",
+    "event_gradual pressure",
+    "event_income loss",
+    "event_normal",
+    "event_one-month emergency",
+    "event_recovery",
+    "event_rising essentials",
+    "event_variable income"
+  ],
+  "future_horizon_months": 2
+}

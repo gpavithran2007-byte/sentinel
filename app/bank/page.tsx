@@ -1,8 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type RiskAssessment = {
+  risk: {
+    risk_score: number;
+    distress_probability: number;
+    prediction: number;
+    risk_level: string;
+    top_factors: Array<{ feature: string; impact: number }>;
+  };
+  recommendation: { action: string; message: string };
+};
 
 type Customer = {
+  id: string;
   name: string;
   initials: string;
   location: string;
@@ -18,6 +30,7 @@ type Customer = {
 
 const customers: Customer[] = [
   {
+    id: "C00001",
     name: "Maya Thompson",
     initials: "MT",
     location: "Birmingham · 5 products",
@@ -32,6 +45,7 @@ const customers: Customer[] = [
     payments: "1 late",
   },
   {
+    id: "C00002",
     name: "Daniel Okafor",
     initials: "DO",
     location: "Leeds · 3 products",
@@ -46,6 +60,7 @@ const customers: Customer[] = [
     payments: "1 missed",
   },
   {
+    id: "C00003",
     name: "Priya Shah",
     initials: "PS",
     location: "Manchester · 4 products",
@@ -63,7 +78,45 @@ const customers: Customer[] = [
 
 export default function BankDashboard() {
   const [selected, setSelected] = useState(customers[0]);
+  const [assessment, setAssessment] = useState<RiskAssessment | null>(null);
+  const [assessmentLoading, setAssessmentLoading] = useState(true);
+  const [assessmentError, setAssessmentError] = useState("");
   const [notice, setNotice] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch("/api/risk-assessment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ customerId: selected.id }),
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Risk assessment unavailable");
+        return (await response.json()) as RiskAssessment;
+      })
+      .then((result) => setAssessment(result))
+      .catch((error: Error) => {
+        if (error.name !== "AbortError") {
+          setAssessment(null);
+          setAssessmentError("Live assessment unavailable. Showing demo case data.");
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setAssessmentLoading(false);
+      });
+
+    return () => controller.abort();
+  }, [selected.id]);
+
+  const riskScore = assessment?.risk.risk_score ?? selected.score;
+  const probability = assessment
+    ? Math.round(assessment.risk.distress_probability * 100)
+    : selected.confidence;
+  const factors = assessment?.risk.top_factors.filter((factor) => factor.impact > 0).slice(0, 3);
+  const recommendation = assessment?.recommendation.message ??
+    "Offer a 15-minute financial wellbeing call and review repayment flexibility.";
 
   const showNotice = (message: string) => {
     setNotice(message);
@@ -243,7 +296,12 @@ export default function BankDashboard() {
                 {customers.map((customer) => (
                   <button
                     key={customer.name}
-                    onClick={() => setSelected(customer)}
+                    onClick={() => {
+                      setAssessmentLoading(true);
+                      setAssessmentError("");
+                      setAssessment(null);
+                      setSelected(customer);
+                    }}
                     className={`flex w-full items-center gap-4 px-6 py-5 text-left transition hover:bg-[#f7faf9] ${
                       selected.name === customer.name
                         ? "bg-[#f0f8f4]"
@@ -282,12 +340,12 @@ export default function BankDashboard() {
                     <div className="text-right">
                       <p
                         className={`text-lg font-semibold ${
-                          customer.score >= 70
+                          (assessment && customer.id === selected.id ? riskScore : customer.score) >= 70
                             ? "text-[#bd634f]"
                             : "text-[#a06b1c]"
                         }`}
                       >
-                        {customer.score}
+                        {assessment && customer.id === selected.id ? riskScore : customer.score}
                       </p>
 
                       <p className="text-[9px] uppercase tracking-wide text-[#96a4a7]">
@@ -332,7 +390,7 @@ export default function BankDashboard() {
 
                 <div className="rounded-xl bg-white/10 px-4 py-2 text-right">
                   <p className="text-2xl font-semibold text-[#f5c4a4]">
-                    {selected.score}
+                    {assessmentLoading ? "..." : riskScore}
                   </p>
 
                   <p className="text-[9px] uppercase tracking-wide text-[#b1cbc5]">
@@ -341,6 +399,12 @@ export default function BankDashboard() {
                 </div>
 
               </div>
+
+              {assessmentError && (
+                <div className="mt-4 rounded-lg border border-[#f5c4a4]/30 bg-[#f5c4a4]/10 px-3 py-2 text-[10px] text-[#f5c4a4]">
+                  {assessmentError}
+                </div>
+              )}
 
               {/* AI explanation */}
               <div className="mt-6 rounded-xl border border-white/10 bg-white/[.06] p-5">
@@ -351,17 +415,25 @@ export default function BankDashboard() {
                   </p>
 
                   <span className="text-[10px] text-[#a9c2bd]">
-                    {selected.confidence}% confidence
+                    {assessmentLoading ? "Assessing..." : `${probability}% probability`}
                   </span>
                 </div>
 
-                <p className="mt-3 text-sm font-medium">
-                  {selected.signal}
-                </p>
-
-                <p className="mt-2 text-xs leading-5 text-[#a9c2bd]">
-                  {selected.detail}
-                </p>
+                {factors?.length ? (
+                  <div className="mt-3 space-y-2">
+                    {factors.map((factor) => (
+                      <div key={factor.feature} className="flex items-center justify-between gap-3 text-xs">
+                        <span className="text-[#dceae5]">{factor.feature.replaceAll("_", " ")}</span>
+                        <span className="text-[#f5c4a4]">+{Math.abs(factor.impact).toFixed(2)}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <>
+                    <p className="mt-3 text-sm font-medium">{selected.signal}</p>
+                    <p className="mt-2 text-xs leading-5 text-[#a9c2bd]">{selected.detail}</p>
+                  </>
+                )}
 
               </div>
 
@@ -395,8 +467,7 @@ export default function BankDashboard() {
                 <div className="mt-2 rounded-xl border border-[#8bc6a5]/20 bg-[#8bc6a5]/10 p-4">
 
                   <p className="text-sm leading-6">
-                    Offer a 15-minute financial wellbeing call and review
-                    repayment flexibility.
+                    {recommendation}
                   </p>
 
                   <p className="mt-2 text-[10px] text-[#9bc9b6]">

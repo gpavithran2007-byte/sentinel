@@ -37,6 +37,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# generated machine-learning artifacts
+/models/
+!/models/
+!/models/financial_distress/
+!/models/financial_distress/*.joblib
+!/models/financial_distress/*.json
+!/models/financial_distress/*.csv
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
