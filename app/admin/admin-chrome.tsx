@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { SignOut } from "@/app/components/sign-out";
 
 const navigation = [
   ["Overview", "/admin"],
@@ -37,7 +38,7 @@ export function AdminSidebar() {
 }
 
 export function AdminHeader({ eyebrow = "Sentinel Administration" }: { eyebrow?: string }) {
-  return <header className="flex min-h-[76px] items-center justify-between border-b border-[#dfe7e8] bg-white px-6 py-5 sm:px-10"><div><p className="text-xs uppercase tracking-[.16em] text-[#789096]">{eyebrow}</p><h1 className="mt-1 max-w-3xl text-xl font-semibold tracking-[-.02em]">System health, model monitoring and responsible AI oversight</h1></div><div className="hidden h-9 items-center rounded-full bg-[#e9f4ee] px-3 text-[10px] font-medium text-[#3f8068] sm:flex">DEMO ENVIRONMENT</div></header>;
+  return <header className="flex min-h-[76px] items-center justify-between border-b border-[#dfe7e8] bg-white px-6 py-5 sm:px-10"><div><p className="text-xs uppercase tracking-[.16em] text-[#789096]">{eyebrow}</p><h1 className="mt-1 max-w-3xl text-xl font-semibold tracking-[-.02em]">System health, model monitoring and responsible AI oversight</h1></div><div className="flex items-center gap-2"><div className="hidden h-9 items-center rounded-full bg-[#e9f4ee] px-3 text-[10px] font-medium text-[#3f8068] sm:flex">DEMO ENVIRONMENT</div><SignOut /></div></header>;
 }
 
 export function AdminShell({ children, eyebrow }: { children: ReactNode; eyebrow?: string }) {

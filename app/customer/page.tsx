@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { SignOut } from "@/app/components/sign-out";
 
 type Intervention = {
   customer: string;
@@ -69,6 +70,8 @@ export default function CustomerPage() {
           <span className="hidden text-xs text-[#789096] sm:block">
             Private & secure
           </span>
+
+          <SignOut />
 
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#dbece3] text-xs font-semibold text-[#28634e]">
             MT

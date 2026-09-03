@@ -37,7 +37,9 @@ export default function Home() {
 
   const [role, setRole] = useState<Role>("bank");
   const [loading, setLoading] = useState(false);
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const emailIsValid = /^[^@\s]+@[^@\s]+$/.test(email);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -189,36 +191,19 @@ export default function Home() {
                     <input
                       type="email"
                       required
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
                       placeholder="you@example.com"
                       className="h-12 w-full rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 text-sm outline-none placeholder:text-white/20 focus:border-cyan-300/40 focus:ring-4 focus:ring-cyan-300/[0.05]"
                     />
                   </div>
 
-                  <div>
-                    <label className="mb-2 block text-xs font-medium text-white/60">
-                      Password
-                    </label>
-
-                    <div className="relative">
-                      <input
-                        type={passwordVisible ? "text" : "password"}
-                        required
-                        placeholder="Enter your password"
-                        className="h-12 w-full rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 pr-12 text-sm outline-none placeholder:text-white/20 focus:border-cyan-300/40 focus:ring-4 focus:ring-cyan-300/[0.05]"
-                      />
-
-                      <button
-                        type="button"
-                        onClick={() => setPasswordVisible(!passwordVisible)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-white/30 hover:text-white"
-                      >
-                        {passwordVisible ? "Hide" : "Show"}
-                      </button>
-                    </div>
-                  </div>
+                  <p className="text-[11px] text-white/35">
+                    Demo environment · No real credentials required
+                  </p>
 
                   <button
-                    disabled={loading}
+                    disabled={loading || !emailIsValid}
                     className="flex h-12 w-full items-center justify-center rounded-xl bg-cyan-300 text-sm font-semibold text-[#041018] transition hover:bg-cyan-200 disabled:opacity-60"
                   >
                     {loading ? "Authenticating..." : "Continue securely →"}
